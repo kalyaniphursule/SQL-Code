@@ -1,7 +1,87 @@
-Query a count of the number of cities in CITY having a Population larger than
+1. Query a count of the number of cities in CITY having a Population larger than
 
 https://www.hackerrank.com/challenges/revising-aggregations-the-count-function/problem?isFullScreen=true
 
 SQL:
 select count(name) from city
 where population>100000
+
+2. Query the total population of all cities in CITY where District is California
+SQL:
+select sum(population) 
+from city
+where 
+district='California'
+
+3.Query the average population of all cities in CITY where District is California.
+SQL:
+select avg(population) 
+from city
+where 
+district='California'
+
+4.  Query the average population for all cities in CITY, rounded down to the nearest integer.
+
+SQL:
+select round(avg(population),0) from city
+
+5. Query the sum of the populations for all Japanese cities in CITY. The COUNTRYCODE for Japan is JPN.
+SQL:
+select 
+sum(population)
+from City
+where COUNTRYCODE='JPN'
+
+6. Query the difference between the maximum and minimum populations in CITY.
+SQL:
+select (max(population)-min(population))
+from city
+
+
+7. Samantha was tasked with calculating the average monthly salaries for all employees in the EMPLOYEES table, but did not realize her keyboard's
+
+key was broken until after completing the calculation. She wants your help finding the difference between her miscalculation (using salaries with any zeros removed), and the actual average salary.
+
+Write a query calculating the amount of error (i.e.:
+average monthly salaries), and round it up to the next integer.
+
+SQL:
+
+SELECT CAST(CEILING(AVG(CAST(SALARY AS FLOAT)) - AVG(CAST(REPLACE(SALARY,'0','') AS FLOAT))) AS INT) FROM EMPLOYEES;
+
+
+8. We define an employee's total earnings to be their monthly worked, and the maximum total earnings to be the maximum total earnings for any employee in the Employee table. Write a query to find the maximum total earnings for all employees as well as the total number of employees who have maximum total earnings. Then print these values as space-separated integers.
+
+
+SQL:
+
+select 
+max(salary*months),
+count(salary*months)
+from employee 
+where salary*months=(select max(salary*months)from employee);
+
+9. Query the following two values from the STATION table:
+
+    The sum of all values in LAT_N rounded to a scale of 
+
+decimal places.
+The sum of all values in LONG_W rounded to a scale of
+
+    decimal places.
+
+Input Format
+
+The STATION table is described as follows:
+
+
+SQL:
+
+SELECT ROUND(CAST(SUM(LAT_N) AS DECIMAL(12,2)),2) AS LT , ROUND(CAST(SUM(LONG_W) AS DECIMAL (12,2)),2) AS LON FROM STATION ;
+
+10 . Query the sum of Northern Latitudes (LAT_N) from STATION having values greater than and less than . Truncate your answer to decimal places.
+
+SQL:
+select cast(sum(LAT_N) as decimal(12,4)) from station
+where (LAT_N)<137.2345 and (LAT_N)>38.7880
+
